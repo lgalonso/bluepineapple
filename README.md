@@ -5,7 +5,7 @@ Bluepineapple is a project to integrate different bluetooth tools to simulate a 
 
 
 # Dependencies
-The current project uses the following tools in order to scan and gather information on bluetooth devices:
+The current project uses the following tools in order to scan, gather information and perform attacks on bluetooth devices:
 - Bluelog
 - Blueranger
 - Sdptool
