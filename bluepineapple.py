@@ -10,29 +10,29 @@ hci = args.interface
 
 def bluelog(mode):
     if "scan" in mode:
-        print("Logging options: m (manufacturer) n (name) c (class) v (verbose)")
+        print("\n\nLogging options: m (manufacturer) n (name) c (class) v (verbose)")
         options = input("Write options (ex: mncv): ")
 
         os.system("sudo bluelog -i " + hci + " -" + options + " -o ./btdevices.log")
 
-        print("End, devices logged in btdevices.log file")
+        print("\n\nEnd, devices logged in btdevices.log file")
     elif "show" in mode:
-        print("Devices detected:")
+        print("\n\nDevices detected:")
         os.system("sudo cat btdevices.log")
     else:
-        print("Invalid option.")
+        print("\n\nInvalid option.")
 
 def blueranger():
-    mac = input("Write target MAC address: ")
+    mac = input("\n\nWrite target MAC address: ")
 
     os.system("sudo blueranger " + hci + " " + mac)
 
 def btlesniffer():
-    print("Press CTRL + C to stop")
+    print("\n\nPress CTRL + C to stop\n\n")
     os.system("sudo btlesniffer")
 
 def sdptool():
-    mac = input("Write target MAC address: ")
+    mac = input("\n\nWrite target MAC address: ")
     os.system("sudo sdptool -i " + hci + " browse -–tree –-l2cap "+ mac +" > target_" + mac + ".log")
 
 def bluesnarfer_setup():
@@ -42,7 +42,7 @@ def bluesnarfer_setup():
 ##TODO: expand testing with older devices before further development
 def bluesnarfer(mode):
     bluesnarfer_setup()
-    mac = input("Write target MAC address: ")
+    mac = input("\n\nWrite target MAC address: ")
     mc = input("Write target channel for messages: ")
     pbc = input("Write target channel for phone book: ")
 
@@ -112,6 +112,6 @@ def main():
         elif "quit" in action:
             bye()
         else:
-            print("Invalid option.")
+            print("\n\nInvalid option.")
 
 main()
