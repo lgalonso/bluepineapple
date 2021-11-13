@@ -2,7 +2,7 @@ import os
 import argparse
 import subprocess
 
-parser = argparse.ArgumentParser(description='This is a test script for bluepineapple.')
+parser = argparse.ArgumentParser(description='Bluepineapple is a project to integrate different bluetooth tools to simulate a Pineapple like device. It has been developed for using on Raspberry Pi 4 with Kali Linux installed.')
 parser.add_argument('-i','--interface', help='Bluetooth interface, usually hci0',required=True)
 args = parser.parse_args()
 
