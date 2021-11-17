@@ -34,6 +34,7 @@ def btlesniffer():
 def sdptool():
     mac = input("\n\nWrite target MAC address: ")
     os.system("sudo sdptool -i " + hci + " browse -–tree –-l2cap "+ mac +" > target_" + mac + ".log")
+    print(hci, mac)
 
 def bluesnarfer_setup():
     subprocess.run(["sudo", "mkdir", "-p", "/dev/bluetooth/rfcomm"], stdout=subprocess.DEVNULL)
