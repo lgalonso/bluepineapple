@@ -80,10 +80,10 @@ def spoofing(mode):
         os.system("sudo spooftooph -i " + hci + " -R")
     elif 'interval' in mode:
         interval = input("\n\nWrite interval to spoof nearby devices: ")
-        subprocess.run(["sudo", "spooftooph", "-i", hci, "-t", interval])
-        #list_dir = subprocess.Popen(["sudo", "spooftooph", "-i", hci, "-t", interval])
-        print("\n\nSpoofing in progress...\n\n")
-        #list_dir.wait()
+        print("\n\nSpoofing in progress (open new terminal to continue bluetoothing)...\n\n")
+        subprocess.run(["sudo", "spooftooph", "-i", hci, "-t", interval], stdout=subprocess.DEVNULL)
+    else:
+        print("Invalid action.")
 
 def welcome():
     print("\n\n")
