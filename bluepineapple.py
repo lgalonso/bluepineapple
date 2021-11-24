@@ -82,6 +82,7 @@ def spoofing(mode):
         interval = input("\n\nWrite interval to spoof nearby devices: ")
         #subprocess.run(["sudo", "spooftooph", "-i", hci, "-t", interval], stdout=subprocess.DEVNULL)
         list_dir = subprocess.Popen(["sudo", "spooftooph", "-i", hci, "-t", interval])
+        print("\n\nSpoofing in progress...\n\n")
         list_dir.wait()
 
 def welcome():
