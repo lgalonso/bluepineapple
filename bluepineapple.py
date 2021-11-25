@@ -82,6 +82,11 @@ def spoofing(mode):
         interval = input("\n\nWrite interval to spoof nearby devices: ")
         print("\n\nSpoofing in progress (open new terminal to continue bluetoothing)...\n\n")
         subprocess.run(["sudo", "spooftooph", "-i", hci, "-t", interval], stdout=subprocess.DEVNULL)
+    if 'custom' in mode:
+        mac = input("Write MAC address: ")
+        name = input("Write device name: ")
+        dclass = input("Write device class (0x0000c): ")
+        os.system("sudo spooftooph -i " + hci + " -n " + name + " -a " + mac + " -c " + dclass)
     else:
         print("Invalid action.")
 
@@ -127,7 +132,7 @@ def main():
         elif "7" in action:
             blueborne()
         elif "8" in action:
-            mode = input("\n\nChoose Spoofing action (random to generate random info or nearby to clone interval devices): ")
+            mode = input("\n\nChoose Spoofing action ('random' to generate random info, 'interval' to clone nearby devices or 'custom'): ")
             spoofing(mode)
         elif "quit" in action:
             bye()
